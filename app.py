@@ -7,7 +7,7 @@ app = Flask(__name__)
 boggle_game = Boggle()
 
 app.config['SECRET_KEY'] = 'secret'
-app.config['TB_DEBUG_INTERPECT_REDIRECTS'] = False
+app.config['TB_DEBUG_INTERCEPT_REDIRECTS'] = False
 
 @app.route('/', methods=['GET'])
 def show_game():

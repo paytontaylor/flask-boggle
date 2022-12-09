@@ -2,8 +2,20 @@ let $form = $('form')
 let $response = $('#response')
 let $showScore = $('#showScore')
 let score = 0
-let timer;
+let $showTimer = $('#showTimer')
 let seconds = 60;
+
+setInterval(() => {
+    if (seconds > 0) {
+        seconds--
+        $showTimer.text(`Time Remaining: ${seconds}`)
+    }
+    else {
+        clearInterval()
+        $showTimer.remove()
+        $form.remove()
+    }
+}, 1000)
 
 $form.submit(async function (evt) {
     evt.preventDefault()
@@ -13,7 +25,7 @@ $form.submit(async function (evt) {
     if (response === 'ok') {
         $response.text('ok')
         score += $guess.length
-        $showScore.text(score)
+        $showScore.text(`Score: ${score}`)
     }
     if (response === 'not-on-board') {
         $response.text('not-on-board')

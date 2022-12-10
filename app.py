@@ -16,9 +16,15 @@ def show_game():
 
     return render_template('boggle.html',board=board)
 
-@app.route('/check-word')
+@app.route('/check-word', methods=['GET'])
 def check_word():
     board = session['board']
-    word = request.args['guess']
+    word = request.form['guess']
     res = boggle_game.check_valid_word(board,word)
     return jsonify(result=res)
+
+@app.route('/check-stats', methods=['POST'])
+def check_stats():
+ hs = request.json()['high-score']
+ return hs
+

@@ -13,7 +13,7 @@ app.config['TB_DEBUG_INTERCEPT_REDIRECTS'] = False
 def show_game():
     board = boggle_game.make_board()
     session['board'] = board
-    session['high-score'] = 0
+    session['high-score']
 
     return render_template('boggle.html',board=board)
 
@@ -24,6 +24,8 @@ def check_word():
     res = boggle_game.check_valid_word(board,word)
     return jsonify(result=res)
 
-# @app.route('/check-stats', methods=['POST'])
-# def check_stats():
+@app.route('/check-stats', methods=['POST'])
+def check_stats():
+    session['high-score'] = 
+    return
 

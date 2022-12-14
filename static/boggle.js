@@ -3,9 +3,8 @@ let $response = $('#response')
 let $showScore = $('#showScore')
 let score = 0
 let $showTimer = $('#showTimer')
-let seconds = 10;
+let seconds = 30;
 let timesPlayed = 0
-let highScore = 0
 
 
 function timer() {
@@ -30,25 +29,7 @@ $form.submit(async function (evt) {
     let res = await axios.get('/check-word', { params: { 'guess': $guess } })
     let response = res.data.result
     checkWord(response)
-    let data = await axios.post('/check-stats', { 'high-score': highScore, 'times-played': timesPlayed })
 })
-
-async function checkHighScore() {
-    if (score > highScore) {
-        highScore = score
-        let data = await axios.post('/check-stats', { 'high-score': highScore, 'times-played': timesPlayed })
-    }
-    return
-}
-
-
-async function getHighScore() {
-    let res = await axios.get('/', {
-        params: {
-            'high-score': highScore
-        }
-    })
-}
 
 
 function checkWord(res) {
@@ -72,6 +53,14 @@ function checkWord(res) {
             highScore = score
         }
     }
+}
+
+async function getScore() {
+    await axios.post('/', {
+        params: {
+            'score': score
+        }
+    })
 }
 
 timer()

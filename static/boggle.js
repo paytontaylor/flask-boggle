@@ -56,7 +56,7 @@ function checkWord(res) {
 }
 
 async function getScore() {
-    await axios.post('/', {
+    await axios.post('/check-stats', {
         params: {
             'score': score
         }

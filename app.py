@@ -26,6 +26,6 @@ def check_word():
 
 @app.route('/check-stats', methods=['POST'])
 def check_stats():
-    session['high-score'] = 
+    session['high-score']
     return
 

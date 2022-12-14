@@ -13,6 +13,7 @@ app.config['TB_DEBUG_INTERCEPT_REDIRECTS'] = False
 def show_game():
     board = boggle_game.make_board()
     session['board'] = board
+    session['high-score'] = 0
 
     return render_template('boggle.html',board=board)
 

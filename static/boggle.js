@@ -18,8 +18,8 @@ function timer() {
             clearInterval()
             $showTimer.remove()
             $form.remove()
-            checkHighScore()
-            // getStats()
+            getHighScore()
+            timesPlayed += 1
         }
     }, 1000)
 }
@@ -30,29 +30,47 @@ $form.submit(async function (evt) {
     let res = await axios.get('/check-word', { params: { 'guess': $guess } })
     let response = res.data.result
     checkWord(response)
-    let data = await axios.post('/check-word', { 'high-score': highScore, 'times-played': timesPlayed })
+    let data = await axios.post('/check-stats', { 'high-score': highScore, 'times-played': timesPlayed })
 })
 
-
-function checkHighScore() {
+async function checkHighScore() {
     if (score > highScore) {
         highScore = score
+        let data = await axios.post('/check-stats', { 'high-score': highScore, 'times-played': timesPlayed })
     }
+    return
 }
+
+
+async function getHighScore() {
+    let res = await axios.get('/', {
+        params: {
+            'high-score': highScore
+        }
+    })
+}
+
+
 function checkWord(res) {
     if (res === 'ok') {
         $response.text('ok')
         score += $guess.length
         $showScore.text(`Score: ${score}`)
-        timesPlayed += 1
+        if (score > highScore) {
+            highScore = score
+        }
     }
     if (res === 'not-on-board') {
         $response.text('not-on-board')
-        timesPlayed += 1
+        if (score > highScore) {
+            highScore = score
+        }
     }
     if (res === 'not-word') {
         $response.text('not-word')
-        timesPlayed += 1
+        if (score > highScore) {
+            highScore = score
+        }
     }
 }
 

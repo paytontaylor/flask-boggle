@@ -15,25 +15,26 @@
         <h1 class="text-center">Boggle</h1>
         <h3 id="showTimer" class="text-center text-danger"></h3>
         <h4 id="showScore" class="text-center">
-            </h2>
-            <table class="table">
-                {% for row in board %}
-                <tr>
-                    {% for ltr in row %}
-                    <td>{{ltr}}</td>
-                    {% endfor %}
-                </tr>
+        </h4>
+        <h4>{{highScore}}</h4>
+        <table class="table">
+            {% for row in board %}
+            <tr>
+                {% for ltr in row %}
+                <td>{{ltr}}</td>
                 {% endfor %}
-            </table>
-            <div class="container">
-                <form>
-                    <label for="guess" style="font-size: 20px">Guess</label>
-                    <input id="guess" type="text" name="guess" class="form-control" />
-                    <br />
-                    <button class="btn btn-success btn-sm" id="submitBtn">Submit</button>
-                    <p id=""></p>
-                </form>
-            </div>
+            </tr>
+            {% endfor %}
+        </table>
+        <div class="container">
+            <form>
+                <label for="guess" style="font-size: 20px">Guess</label>
+                <input id="guess" type="text" name="guess" class="form-control" />
+                <br />
+                <button class="btn btn-success btn-sm" id="submitBtn">Submit</button>
+                <p id=""></p>
+            </form>
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
